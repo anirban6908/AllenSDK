@@ -109,7 +109,11 @@ class NwbDataSet(object):
                 response = swp['response']['timeseries']['data'].value
 
             if 'unit' in stimulus_dataset.attrs:
-                unit = stimulus_dataset.attrs["unit"].decode('UTF-8')
+                unit = stimulus_dataset.attrs["unit"]
+                try:
+                    unit = stimulus_dataset.attrs["unit"].decode('UTF-8')
+                except:
+                    pass
 
                 unit_str = None
                 if unit.startswith('A'):
