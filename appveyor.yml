@@ -15,6 +15,8 @@ environment:
       PYTHON: 2.7
     - MINICONDA: "C:\\Miniconda36-x64"
       PYTHON: 3.6
+    - MINICONDA: "C:\\Miniconda37-x64"
+      PYTHON: 3.7
 
 install:
   - set PATH=%MINICONDA%;%MINICONDA%\\Scripts;%PATH%
@@ -23,7 +25,9 @@ install:
   - conda create -q -n test-environment python=%PYTHON% pip
   - activate test-environment
   - conda install statsmodels
-  - if %PYTHON% == 2.7 conda install scikit-image
+  - pip install Pillow
+  - if %PYTHON% == 2.7 conda install -c conda-forge scikit-image
+  - if %PYTHON% == 2.7 pip install SimpleITK==1.1.0
   - pip install codecov
   - pip install -r test_requirements.txt
   - pip install .
